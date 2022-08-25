@@ -4,4 +4,4 @@
 pip3 install -r requirements.txt
 
 ### run the code
-uvicorn main:app --reload
+python3 plot_digits_classification.py
