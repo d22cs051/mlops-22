@@ -1,0 +1,91 @@
+parms:- {'gamma': 0.1, 'C': 0.1}, accuracy:- 0.08333333333333333
+parms:- {'gamma': 0.1, 'C': 0.5}, accuracy:- 0.11666666666666667
+parms:- {'gamma': 0.005, 'C': 0.1}, accuracy:- 0.7222222222222222
+parms:- {'gamma': 0.005, 'C': 0.2}, accuracy:- 0.9111111111111111
+parms:- {'gamma': 0.005, 'C': 0.5}, accuracy:- 0.9611111111111111
+parms:- {'gamma': 0.005, 'C': 1.0}, accuracy:- 0.9888888888888889
+parms:- {'gamma': 0.001, 'C': 0.7}, accuracy:- 1.0
+Results
+best parms:- {'gamma': 0.001, 'C': 0.7},best accuracy:- 1.0
+Classification report for classifier SVC(C=0.7, gamma=0.001):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        21
+           1       1.00      1.00      1.00        17
+           2       1.00      1.00      1.00        12
+           3       1.00      1.00      1.00        25
+           4       1.00      1.00      1.00        13
+           5       1.00      1.00      1.00        10
+           6       1.00      1.00      1.00        24
+           7       1.00      1.00      1.00        16
+           8       1.00      1.00      1.00        21
+           9       1.00      1.00      1.00        21
+
+    accuracy                           1.00       180
+   macro avg       1.00      1.00      1.00       180
+weighted avg       1.00      1.00      1.00       180
+
+
+parms:- {'gamma': 0.1, 'C': 0.1}, accuracy:- 0.07222222222222222
+parms:- {'gamma': 0.1, 'C': 0.2}, accuracy:- 0.1
+parms:- {'gamma': 0.1, 'C': 2.0}, accuracy:- 0.1111111111111111
+parms:- {'gamma': 0.005, 'C': 0.1}, accuracy:- 0.11666666666666667
+parms:- {'gamma': 0.005, 'C': 0.5}, accuracy:- 0.3333333333333333
+parms:- {'gamma': 0.005, 'C': 0.7}, accuracy:- 0.5166666666666667
+parms:- {'gamma': 0.005, 'C': 1.0}, accuracy:- 0.8722222222222222
+parms:- {'gamma': 0.005, 'C': 5.0}, accuracy:- 0.9277777777777778
+parms:- {'gamma': 0.001, 'C': 0.2}, accuracy:- 0.9555555555555556
+parms:- {'gamma': 0.001, 'C': 0.5}, accuracy:- 0.9888888888888889
+parms:- {'gamma': 0.001, 'C': 0.7}, accuracy:- 0.9944444444444445
+parms:- {'gamma': 0.0005, 'C': 0.7}, accuracy:- 1.0
+Results
+best parms:- {'gamma': 0.0005, 'C': 0.7},best accuracy:- 1.0
+Classification report for classifier SVC(C=0.7, gamma=0.0005):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        18
+           1       1.00      1.00      1.00        16
+           2       1.00      1.00      1.00        19
+           3       1.00      1.00      1.00        12
+           4       1.00      1.00      1.00        19
+           5       1.00      1.00      1.00        19
+           6       1.00      1.00      1.00        14
+           7       1.00      1.00      1.00        27
+           8       1.00      1.00      1.00        20
+           9       1.00      1.00      1.00        16
+
+    accuracy                           1.00       180
+   macro avg       1.00      1.00      1.00       180
+weighted avg       1.00      1.00      1.00       180
+
+
+parms:- {'gamma': 0.1, 'C': 0.1}, accuracy:- 0.06666666666666667
+parms:- {'gamma': 0.1, 'C': 0.2}, accuracy:- 0.18888888888888888
+parms:- {'gamma': 0.005, 'C': 2.0}, accuracy:- 0.2722222222222222
+parms:- {'gamma': 0.005, 'C': 5.0}, accuracy:- 0.3111111111111111
+parms:- {'gamma': 0.001, 'C': 0.2}, accuracy:- 0.5888888888888889
+parms:- {'gamma': 0.001, 'C': 0.5}, accuracy:- 0.9611111111111111
+parms:- {'gamma': 0.001, 'C': 10.0}, accuracy:- 0.9722222222222222
+parms:- {'gamma': 0.0005, 'C': 0.5}, accuracy:- 0.9944444444444445
+parms:- {'gamma': 0.0005, 'C': 10.0}, accuracy:- 1.0
+Results
+best parms:- {'gamma': 0.0005, 'C': 10.0},best accuracy:- 1.0
+Classification report for classifier SVC(C=10.0, gamma=0.0005):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        20
+           1       1.00      1.00      1.00        13
+           2       1.00      1.00      1.00        18
+           3       1.00      1.00      1.00        19
+           4       1.00      1.00      1.00        27
+           5       1.00      1.00      1.00        15
+           6       1.00      1.00      1.00        16
+           7       1.00      1.00      1.00        20
+           8       1.00      1.00      1.00        17
+           9       1.00      1.00      1.00        15
+
+    accuracy                           1.00       180
+   macro avg       1.00      1.00      1.00       180
+weighted avg       1.00      1.00      1.00       180
+
+
