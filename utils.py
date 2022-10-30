@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn import svm, metrics
+from sklearn import metrics
 from joblib import dump,load
 
 
@@ -9,6 +9,9 @@ def get_all_h_params_comb(params):
     hyp_para_comb = [{"gamma":g, "C":c} for g in params['gamma'] for c in params['C']]
     return hyp_para_comb
 
+def get_all_h_params_comb_tree(params:dict):
+    hyp_para_comb = [{"criterion":g, "min_samples_split":c, "min_samples_leaf":d} for g in params["criterion"] for c in params["min_samples_split"] for d in params["min_samples_leaf"]]
+    return hyp_para_comb
 def preprocess_digits(dataset):
     # PART: data pre-processing -- to normlize data, to remove noice,
     #                               formate the data tobe consumed by model
@@ -75,24 +78,24 @@ def h_param_tuning(hyp_para_combo, clf, X_train, y_train, X_dev, y_dev, metric):
     return best_model, accuracy, best_hyp_param
 
 
-def train_save_model(X_train, y_train, X_dev, y_dev, model_path, h_param_comb):
+def train_save_model(clf,X_train, y_train, X_dev, y_dev, model_path, h_param_comb):
     
 
     # PART: Define the model
     # Create a classifier: a support vector classifier
-    clf = svm.SVC()
+    # clf = svm.SVC()
     metric = metrics.accuracy_score
     best_model, best_metric, best_hyp_param = h_param_tuning(h_param_comb, clf, X_train, y_train, X_dev, y_dev, metric)
     # if predicted < curr_predicted:
     #     predicted = curr_predicted
 
-
+    # print(h_param_comb)
     best_param_config = "_".join([h+"_"+str(best_hyp_param[h]) for h in best_hyp_param])
 
     if model_path is None:
-        model_path = "svm_" + best_param_config + ".joblib"
+        model_path = "clf_" + best_param_config + ".joblib"
 
-    dump(best_model, "svm_" + best_param_config + ".joblib")
+    dump(best_model, "clf_" + best_param_config + ".joblib")
 
 
     return model_path, clf
