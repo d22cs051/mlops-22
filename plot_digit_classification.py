@@ -83,7 +83,7 @@ for i in range(5):
     X_train, y_train, X_dev, y_dev, X_test, y_test = train_dev_test_split(
         data, label, train_frac, dev_frac, 1 - (train_frac + dev_frac)
     )
-    svm_clf = svm.SVC()
+    svm_clf = svm.SVC(probability=True)
     model_path, svm_clf = train_save_model(svm_clf,X_train, y_train, X_dev, y_dev, None, h_param_comb)
     
     # tree classifier
