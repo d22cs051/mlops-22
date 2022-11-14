@@ -1,4 +1,6 @@
-matplotlib==3.5.3
-scikit-learn==1.1.2
-nltk
-scikit-image==0.19.3
+matplotlib
+sklearn
+pytest
+flask
+scikit-image
+joblib

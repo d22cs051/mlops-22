@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Import datasets, classifiers and performance metrics
 from sklearn import datasets, svm, metrics
-from utils import data_viz,preprocess_digits,h_param_tuning,train_dev_test_split
+from utils import data_viz,preprocess_digits,h_param_tuning,train_dev_test_split,print_all_acc
 
 
 
@@ -19,11 +19,15 @@ h_param_comb = [{"gamma": g, "C": c} for g in gamma_list for c in c_list]
 assert len(h_param_comb) == len(gamma_list) * len(c_list)
 
 
-# Defining fractions
-train_frac = 0.8
-test_frac = 0.1
-dev_frac = 0.1
+# # Defining fractions
+# train_frac = 0.8
+# test_frac = 0.1
+# dev_frac = 0.1
 
+# Defining New fractions
+train_frac = 0.7
+test_frac = 0.2
+dev_frac = 0.1
 
 # PART: load dataset -- data from csv, tsv, jsonl, pickle
 digits = datasets.load_digits()
@@ -56,8 +60,9 @@ x_train, y_train, x_dev, y_dev, x_test, y_test = train_dev_test_split(
 # Create a classifier: a support vector classifier
 clf = svm.SVC()
 metric=metrics.accuracy_score
-best_model, best_metric, best_h_params = h_param_tuning(h_param_comb, clf, x_train, y_train, x_dev, y_dev, metric)
+best_model, best_metric, best_h_params = h_param_tuning(h_param_comb, clf, x_train, y_train, x_dev, y_dev,x_test,y_test,metric)
 
+# print_all_acc(clf,x_train, y_train, x_dev, y_dev, x_test,y_test,metric)
 # PART: Get test set predictions
 # Predict the value of the digit on the test subset
 predicted = best_model.predict(x_test)
