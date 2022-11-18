@@ -18,6 +18,8 @@ jobs:
         run: |
           ls -r ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Install sklearn
+        run: pip3 install -U scikit-learn
       - name: Install dep
         run:  pip3 install --no-cache-dir -r requirements.txt
       - name: Run test cases

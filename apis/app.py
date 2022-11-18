@@ -12,7 +12,7 @@ import numpy as np
 
 
 # loading clf
-clf = load('clf_gamma_0.001_C_0.5.joblib')
+clf = load('./clf_gamma_0.001_C_0.5.joblib')
 # making SS object
 # scaler = StandardScaler()
 # UPLOAD_FOLDER = 'apis/uploads/'
