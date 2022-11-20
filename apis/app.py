@@ -9,10 +9,11 @@ from joblib import load
 # from sklearn.preprocessing import StandardScaler
 
 import numpy as np
+import os
 
-
+PATH_NAME = 'models/'
 # loading clf
-clf = load('./clf_gamma_0.001_C_0.5.joblib')
+# clf = load("./"+PATH_NAME+'clf_gamma_0.001_C_0.2.joblib')
 # making SS object
 # scaler = StandardScaler()
 # UPLOAD_FOLDER = 'apis/uploads/'
@@ -46,27 +47,27 @@ def sum():
     return json.dumps({"sum":z})
 
 # global func to prdict
-def predict(ip_mat):
-    # global clf
-    processed_ip_mat = ip_mat.flatten().reshape(1,-1)
-    # print(clf.predict_proba(processed_ip_mat))
-    return clf.predict(processed_ip_mat)
+# def predict(ip_mat):
+#     # global clf
+#     processed_ip_mat = ip_mat.flatten().reshape(1,-1)
+#     # print(clf.predict_proba(processed_ip_mat))
+#     return clf.predict(processed_ip_mat)
     
 #route to predict with array input
-@app.route('/predict', methods=['POST'])
-def predict_digit():
-    ip_mat1 = request.json["mat1"]
-    ip_mat2 = request.json["mat1"]
-    # ip_mat = np.fromstring(ip_mat, dtype=np.float, sep='\n')
-    # ip_mat = list(map(int,ip_mat))
-    ip_mat1 = np.array(ip_mat1,dtype=np.float)
-    ip_mat2 = np.array(ip_mat2,dtype=np.float)
-    # print(ip_mat1)
-    # print(ip_mat.shape)
-    print(predict(ip_mat1))
-    if predict(ip_mat1) == predict(ip_mat2):
-        return {"result":"Both images are of same number"}
-    return {"result":"Both images are of different numbers"}
+# @app.route('/predict', methods=['POST'])
+# def predict_digit():
+#     ip_mat1 = request.json["mat1"]
+#     ip_mat2 = request.json["mat1"]
+#     # ip_mat = np.fromstring(ip_mat, dtype=np.float, sep='\n')
+#     # ip_mat = list(map(int,ip_mat))
+#     ip_mat1 = np.array(ip_mat1,dtype=np.float)
+#     ip_mat2 = np.array(ip_mat2,dtype=np.float)
+#     # print(ip_mat1)
+#     # print(ip_mat.shape)
+#     print(predict(ip_mat1))
+#     if predict(ip_mat1) == predict(ip_mat2):
+#         return {"result":"Both images are of same number"}
+#     return {"result":"Both images are of different numbers"}
 
 # route to model test image input
 # file upload code
@@ -125,6 +126,36 @@ def predict_digit():
 #     '''
 
 
+
+
+#route to predict with array input
+@app.route('/predict_digit_docker', methods=['POST'])
+def predict_digit_docker():
+    image = request.json["image"]
+    # print(request.json)
+    if dict(request.json).get("model_name",None) == None:
+        os.system(f'python3 args_accepter.py --clf_name svm')
+        with open(f'results/svm_None.txt',"r") as fp:
+            s = fp.readlines()
+        return {"res":s}
+    model_name = str(request.json["model_name"])
+    random_state = int(request.json["random_state"])
+    # ip_mat = np.fromstring(ip_mat, dtype=np.float, sep='\n')
+    # ip_mat = list(map(int,ip_mat))
+    image = np.array(image,dtype=np.float)
+        
+    # print(ip_mat1)
+    # print(ip_mat.shape)
+    # print(predict(ip_mat1))
+    if model_name == None:
+        os.system(f'python3 args_accepter.py --clf_name svm')
+        with open(f'results/svm_None.txt',"r") as fp:
+            s = fp.readlines()
+        return {"res":s}
+    os.system(f'python3 args_accepter.py --clf_name {model_name} --random_state {random_state}')
+    with open(f'results/{model_name}_{random_state}.txt',"r") as fp:
+        s = fp.readlines()
+    return {"res":s}
 
 
 if __name__ == "__main__":

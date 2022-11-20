@@ -1,12 +1,24 @@
 FROM python:3.9
 WORKDIR /mlops
-COPY ./apis/app.py .
+# COPY ./apis/app.py .
 COPY ./requirements.txt .
+
 # COPY ./clf_gamma_0.001_C_0.5.joblib .
 RUN pip3 install -U scikit-learn
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 # RUN --mount=target={PWD},type=bind,source= .
+# EXPOSE 5000
+# ENTRYPOINT [ "python3" ]
+# CMD [ "app.py" ]
+
+COPY ./*.py .
+COPY ./apis/app.py .
+
+ENV CLF_NAME="svm"
+ENV RANDOM_STATE=42
+# CMD python3 args_accepter.py --clf_name ${CLF_NAME} --random_state ${RANDOM_STATE}
+
 EXPOSE 5000
 ENTRYPOINT [ "python3" ]
 CMD [ "app.py" ]
@@ -14,3 +26,6 @@ CMD [ "app.py" ]
 # cmd to build: docker build -t exp:v1 -f docker/Dockerfile .
 # cmd to run: docker run -p 5000:5000 -it exp:v1
 # docker run --name mlops -p 5000:5000 -v ${pwd}/clf_gamma_0.001_C_0.5.joblib:/clf_gamma_0.001_C_0.5.joblib -it exp:v1
+
+# final exam
+# build : docker build -t final_exam:v1 --build-arg CLF_NAME="svm" --build-arg RANDOM_STATE=10 -f docker/Dockerfile .

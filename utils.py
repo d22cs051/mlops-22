@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from joblib import dump,load
+import os
 
+
+PATH_NAME = 'models/'
 
 def get_all_h_params_comb(params):
     hyp_para_comb = [{"gamma":g, "C":c} for g in params['gamma'] for c in params['C']]
@@ -30,16 +33,17 @@ def data_viz(dataset):
         ax.set_title("Training: %i" % label)
 
 
-def train_dev_test_split(data, label, train_frac, dev_frac, test_frac):
+def train_dev_test_split(data, label, train_frac, dev_frac, test_frac,set_random_state:int = 10):
+    # setting random_state to get same splits every ti
     dev_test_frac = 1- train_frac
     X_train, X_dev_test, y_train, y_dev_test = train_test_split(
-        data, label, test_size=dev_test_frac, shuffle=True, random_state = 5
+        data, label, test_size=dev_test_frac, shuffle=True, random_state = set_random_state if set_random_state!=0 else None
     )
 
 
     fraction_want = dev_frac/(dev_frac+test_frac)
     X_test, X_dev, y_test, y_dev = train_test_split(
-        X_dev_test, y_dev_test, test_size=fraction_want, shuffle=True, random_state = 5
+        X_dev_test, y_dev_test, test_size=fraction_want, shuffle=True, random_state = set_random_state if set_random_state!=0 else None
     )
 
     return X_train, y_train, X_dev, y_dev, X_dev, y_dev
@@ -93,9 +97,12 @@ def train_save_model(clf,X_train, y_train, X_dev, y_dev, model_path, h_param_com
     best_param_config = "_".join([h+"_"+str(best_hyp_param[h]) for h in best_hyp_param])
 
     if model_path is None:
-        model_path = "clf_" + best_param_config + ".joblib"
+        model_path = PATH_NAME + "clf_" + best_param_config + ".joblib"
 
-    dump(best_model, "clf_" + best_param_config + ".joblib")
+    if not os.path.exists("models"):
+        os.makedirs("models")
+        
+    dump(best_model,model_path)
 
 
     return model_path, clf
@@ -107,3 +114,13 @@ def train_save_model(clf,X_train, y_train, X_dev, y_dev, model_path, h_param_com
 # for k in range(S):
 #     train, dev, test = create_split()
 #     best_model = train_and_h_tune()
+
+
+def save_result_to_txt(test_acc, test_f1, model_name,file_name:str):
+    if not os.path.exists("results"):
+        os.makedirs("results")
+    with open(f"results/{file_name}","a+") as fp:
+        fp.writelines(f"test accuracy: {test_acc}\n") 
+        fp.writelines(f"test macro: {test_acc}\n")
+        fp.writelines(f"model saved at ./{model_name}\n")
+        fp.close()

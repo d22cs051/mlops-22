@@ -10,6 +10,8 @@ from sklearn.metrics import accuracy_score
 from utils import get_all_h_params_comb_tree, preprocess_digits, data_viz, train_dev_test_split, h_param_tuning, get_all_h_params_comb, train_save_model
 from joblib import dump,load
 
+
+
 # 1. set the range of hyperparameters
 gamma_list  = [0.01, 0.005, 0.001, 0.0005, 0.0001]
 c_list = [0.1, 0.2, 0.5, 0.7, 1, 2, 5, 7, 10]
